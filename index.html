@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>فكر وأخدم - منصة خدمات رواد الأعمال</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fff8ef;--fg:#1a1033;--card:#fff;--pink:#ff4d8d;--yellow:#ffd23f;--violet:#7c4dff;--mint:#2de2b0;--line:#1a1033;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#150d2b;--fg:#fff4e6;--card:#22163f;--line:#fff4e6;color-scheme:dark}}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font-family:'Cairo',Tahoma,sans-serif;line-height:1.6;overflow-x:hidden}
+nav{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;gap:10px}
+.logo{width:88px;height:88px;border-radius:50%;background:var(--yellow);color:#1a1033;border:3px solid var(--line);box-shadow:4px 4px 0 var(--line);display:flex;align-items:center;justify-content:center;text-align:center;font-size:20px;line-height:1.15;font-weight:900;flex-shrink:0}
+.nav-links{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.nav-links a{color:var(--fg);text-decoration:none;font-weight:700}
+.btn{display:inline-block;background:var(--yellow);color:#1a1033;font-family:inherit;font-size:16px;font-weight:700;padding:10px 20px;border:3px solid var(--line);border-radius:999px;box-shadow:4px 4px 0 var(--line);text-decoration:none;cursor:pointer}
+.btn:active{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--line)}
+.hero{position:relative;padding:30px 20px 60px;text-align:center}
+.blob{position:absolute;border-radius:50%;filter:blur(40px);opacity:.5;z-index:0}
+.b1{width:120px;height:120px;background:var(--pink);top:0;right:-20px}
+.b2{width:110px;height:110px;background:var(--mint);bottom:0;left:-20px}
+.hero>*{position:relative;z-index:1}
+.tag{display:inline-block;background:var(--violet);color:#fff;padding:4px 16px;border-radius:999px;font-weight:700;transform:rotate(-3deg)}
+h1{display:inline-block;background:var(--card);border:3px solid var(--line);border-radius:24px;padding:16px 24px;box-shadow:6px 6px 0 var(--line);font-size:clamp(28px,8vw,56px);font-weight:900;line-height:1.25;margin:20px 0}
+h1 em{font-style:normal;background:var(--pink);color:#fff;padding:0 12px;border-radius:14px;display:inline-block;transform:rotate(2deg)}
+.hero p{max-width:500px;margin:0 auto 24px;font-size:18px}
+.auth-box{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:24px}
+.welcome{background:var(--card);border:3px solid var(--line);border-radius:999px;box-shadow:4px 4px 0 var(--line);padding:8px 18px;font-weight:700}
+.sec{padding:50px 20px;max-width:960px;margin:auto}
+.sec h2{font-size:30px;font-weight:900;margin-bottom:8px}
+.sub{margin-bottom:24px;opacity:.85}
+.wizard-box,.calc-box{background:var(--card);border:3px solid var(--line);border-radius:24px;padding:26px;box-shadow:6px 6px 0 var(--line);margin-top:20px}
+.step-content{display:none}.step-content.active{display:block}
+label{font-weight:700}
+input,select,textarea{width:100%;padding:14px;margin:10px 0 16px;border:2px solid var(--line);border-radius:12px;font-family:inherit;font-size:16px;background:var(--bg);color:var(--fg)}
+.wizard-buttons{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:20px}
+.result-box{background:var(--card);border:3px solid var(--line);border-radius:24px;padding:26px;box-shadow:6px 6px 0 var(--line);margin-top:30px;display:none}
+.result-box h3{font-size:24px;margin-bottom:15px;color:var(--violet)}
+.tbl-wrap{overflow-x:auto}
+.schedule-table{width:100%;border-collapse:collapse;margin:20px 0;text-align:right}
+.schedule-table th,.schedule-table td{border:2px solid var(--line);padding:10px;font-size:14px}
+.schedule-table th{background:var(--yellow);color:#1a1033}
+.analysis-report{background:var(--mint);color:#1a1033;border:3px solid var(--line);border-radius:20px;padding:22px;margin-bottom:25px;box-shadow:4px 4px 0 var(--line)}
+.business-plan{background:var(--yellow);color:#1a1033;border:3px solid var(--line);border-radius:20px;padding:22px;margin-top:20px;box-shadow:4px 4px 0 var(--line)}
+.bar{height:16px;background:#fff;border:2px solid #1a1033;border-radius:99px;overflow:hidden;margin:8px 0}
+.bar i{display:block;height:100%;background:var(--pink)}
+.note{font-size:13px;opacity:.7;margin-top:12px}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;justify-content:center;align-items:center;z-index:1000;padding:20px}
+.modal-content{background:var(--card);color:var(--fg);border:3px solid var(--line);border-radius:24px;padding:30px;max-width:500px;width:100%;box-shadow:8px 8px 0 var(--line);position:relative;max-height:90vh;overflow-y:auto}
+.close-btn{position:absolute;top:12px;left:18px;font-size:28px;font-weight:900;cursor:pointer;background:none;border:0;color:var(--fg)}
+footer{text-align:center;padding:30px 20px;opacity:.8}
+@media print{nav,.hero,#calculator,#about,footer,.wizard-box,.no-print,.modal-overlay{display:none!important}body{background:#fff;color:#000}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">فكر<br>وأخدم</div>
+  <div class="nav-links">
+    <a href="#builder">تحليل السوق</a>
+    <a href="#calculator">حاسبة الأرباح</a>
+    <button class="btn" style="padding:6px 14px;font-size:13px" onclick="openModal('contactModal')">اتصل بنا 📞</button>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="blob b1"></div><div class="blob b2"></div>
+  <div class="auth-box" id="authBox">
+    <button class="btn" style="background:#fff;color:#1a1033" onclick="googleSignup()">🔵 التسجيل بحساب Google</button>
+    <button class="btn" style="background:var(--pink);color:#fff" onclick="openModal('signupModal')">✉️ التسجيل بالبريد الإلكتروني</button>
+  </div>
+  <span class="tag">حلّل فكرتك وأطلق مشروعك بنجاح 🚀</span><br>
+  <h1>منصة <em>فكر وأخدم</em><br>حلل، خطّط، واحسب أرباحك</h1>
+  <p>خدمات مجانية لتحليل السوق وحساب الأرباح، وخدمات مدفوعة لتنفيذ شعارك، متجرك، وتطوير مشروعك.</p>
+  <a class="btn" href="#builder">ابدأ تحليل فكرتك مجاناً</a>
+</header>
+
+<section class="sec" id="builder">
+  <h2>مُحلل السوق وخطة العمل 🔍</h2>
+  <p class="sub">اكتب فكرتك وسنصدر لك تقييماً أولياً مجانياً مع خطة عمل مقترحة.</p>
+  <div class="wizard-box">
+    <div class="step-content active" id="step-1">
+      <h3>💡 1. فكرتك أو منتجك</h3>
+      <p>ما هي فكرة مشروعك أو المنتج الذي تريد بيعه؟</p>
+      <input type="text" id="ideaInput" placeholder="مثال: متجر لبيع الملابس العصرية، تطبيق توصيل...">
+      <div class="wizard-buttons"><span></span><button class="btn" onclick="nextStep(2)">التالي ⬅</button></div>
+    </div>
+    <div class="step-content" id="step-2">
+      <h3>🎯 2. الجمهور والميزانية</h3>
+      <p>من هم الزبائن المستهدفون وما ميزانيتك المبدئية؟</p>
+      <input type="text" id="targetInput" placeholder="مثال: الطلاب والشباب، ميزانية 50000 دج">
+      <div class="wizard-buttons">
+        <button class="btn" style="background:var(--card);color:var(--fg)" onclick="nextStep(1)">➡ السابق</button>
+        <button class="btn" style="background:var(--pink);color:#fff" onclick="analyzeMarket()">✨ إصدار التقرير</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="result-box" id="resultBox">
+    <h3 id="projectTitleDisplay"></h3>
+    <div class="analysis-report">
+      <h4>📊 تقييم أولي للفكرة (مجاني):</h4>
+      <div class="bar"><i id="scoreBar"></i></div>
+      <div id="analysisContent" style="font-weight:700;line-height:1.7"></div>
+    </div>
+    <div class="business-plan">
+      <h4>📋 خطة العمل المقترحة:</h4>
+      <div id="planContent" style="font-weight:700;line-height:1.7"></div>
+    </div>
+    <p class="no-print" style="margin-top:20px">يمكنك طلب إنجاز الخدمات الاحترافية التالية:</p>
+    <div class="tbl-wrap no-print">
+      <table class="schedule-table">
+        <thead><tr><th>الخدمة</th><th>الوصف</th><th>السعر (دج)</th><th>الطلب</th></tr></thead>
+        <tbody id="servicesBody"></tbody>
+      </table>
+    </div>
+    <div class="no-print" style="display:flex;gap:10px;margin-top:20px;flex-wrap:wrap">
+      <button class="btn" style="background:var(--mint)" onclick="window.print()">🖨️ طباعة التقرير (PDF)</button>
+      <button class="btn" style="background:var(--card);color:var(--fg)" onclick="resetWizard()">فكرة جديدة 🔄</button>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="calculator">
+  <h2>حاسبة الأرباح 🧮</h2>
+  <p class="sub">أدخل المنتج والميزانية وتكلفة القطعة لتحصل على تقدير تقريبي للكمية والربح.</p>
+  <div class="calc-box">
+    <label for="calcProductName">اسم المنتج:</label>
+    <input type="text" id="calcProductName" placeholder="مثال: ساعة، عطر، حقيبة..." oninput="calc()">
+    <label for="calcTotalBudget">الميزانية الإجمالية (دج):</label>
+    <input type="number" id="calcTotalBudget" value="50000" min="0" oninput="calc()">
+    <label for="calcUnitCost">تكلفة شراء/إنتاج القطعة (دج) — اختياري:</label>
+    <input type="number" id="calcUnitCost" min="0" placeholder="إن تركته فارغاً نقدّره حسب نوع المنتج" oninput="calc()">
+    <div style="background:var(--yellow);color:#1a1033;border:2px solid var(--line);border-radius:16px;padding:20px;margin-top:10px">
+      <h3 style="color:#5b2fd6;margin-bottom:10px">📊 التقدير:</h3>
+      <div id="smartCalcResult" style="font-weight:700;line-height:1.8">أدخل اسم المنتج والميزانية لظهور التفاصيل...</div>
+    </div>
+    <p class="note">الأرقام تقديرية للتوجيه فقط، تحقق من أسعار مورّديك الفعلية. نخصص 20% من الميزانية للتسويق والتوصيل.</p>
+  </div>
+</section>
+
+<section class="sec" id="about" style="background:var(--card);border:3px solid var(--line);border-radius:24px;padding:40px;box-shadow:6px 6px 0 var(--line);margin-top:40px">
+  <h2>من نحن؟ 💡</h2>
+  <p style="margin-top:15px;font-size:18px;line-height:1.8">منصة <strong>فكر وأخدم</strong> توفر أدوات مجانية لتحليل أفكارك وحساب أرباحك، وخدمات مدفوعة (تصميم، برمجة، إعلانات) لتختصر الوقت والجهد.</p>
+</section>
+
+<footer>© فكر وأخدم</footer>
+
+<div class="modal-overlay" id="orderModal">
+  <div class="modal-content">
+    <button class="close-btn" onclick="closeModal('orderModal')" aria-label="إغلاق">&times;</button>
+    <h3 style="color:var(--violet)">تأكيد الطلب 🚀</h3>
+    <p id="modalServiceDesc" style="font-size:14px;margin-top:5px;font-weight:700;color:var(--pink)"></p>
+    <form onsubmit="submitOrder(event)" style="margin-top:15px">
+      <label for="clientName">اسمك الكامل:</label>
+      <input type="text" id="clientName" placeholder="مثال: أمين بلقاسم" required>
+      <label for="clientPhone">رقم الهاتف (واتساب):</label>
+      <input type="tel" id="clientPhone" placeholder="0661234567" required>
+      <label for="paymentMethod">طريقة الدفع:</label>
+      <select id="paymentMethod" onchange="togglePaymentInfo()">
+        <option value="baridimob">بريدي موب (BaridiMob)</option>
+        <option value="ccp">حساب CCP</option>
+        <option value="cash">الدفع عند استلام الخدمة</option>
+      </select>
+      <div id="paymentInstructions" style="background:var(--bg);border:2px dashed var(--line);padding:12px;border-radius:10px;font-size:13px;margin-bottom:15px;font-weight:700"></div>
+      <button type="submit" class="btn" style="width:100%;background:var(--mint)">تأكيد الطلب عبر الواتساب 📩</button>
+    </form>
+  </div>
+</div>
+
+<div class="modal-overlay" id="contactModal">
+  <div class="modal-content">
+    <button class="close-btn" onclick="closeModal('contactModal')" aria-label="إغلاق">&times;</button>
+    <h3 style="color:var(--violet)">اتصل بنا 📞</h3>
+    <form onsubmit="submitContact(event)" style="margin-top:15px">
+      <label for="cName">اسمك:</label>
+      <input type="text" id="cName" placeholder="اسمك الكريم" required>
+      <label for="cMsg">رسالتك:</label>
+      <textarea id="cMsg" rows="3" placeholder="اكتب رسالتك هنا..." required></textarea>
+      <button type="submit" class="btn" style="width:100%;background:var(--mint)">إرسال عبر الواتساب 📩</button>
+    </form>
+  </div>
+</div>
+
+<div class="modal-overlay" id="signupModal">
+  <div class="modal-content">
+    <button class="close-btn" onclick="closeModal('signupModal')" aria-label="إغلاق">&times;</button>
+    <h3 style="color:var(--violet)">إنشاء حساب ✉️</h3>
+    <form onsubmit="submitSignup(event)" style="margin-top:15px">
+      <label for="suName">اسمك:</label>
+      <input type="text" id="suName" placeholder="اسمك الكريم" required>
+      <label for="suEmail">بريدك الإلكتروني:</label>
+      <input type="email" id="suEmail" placeholder="name@example.com" required>
+      <button type="submit" class="btn" style="width:100%;background:var(--mint)">تسجيل ✅</button>
+    </form>
+  </div>
+</div>
+
+<script>
+// ⚠️ عدّل هذه القيم ببياناتك الحقيقية
+var WA_NUMBER = "213557654674";            // رقم واتساب بالصيغة الدولية بدون + أو 00
+var BARIDIMOB_RIP = "ضع رقم RIP الحقيقي هنا";
+var CCP_NUMBER = "ضع رقم CCP الحقيقي هنا";
+var GOOGLE_CLIENT_ID = "";                // ضع هنا Client ID من Google Cloud لتفعيل التسجيل بجوجل
+
+var $ = function(id){return document.getElementById(id)};
+function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+function fmt(n){return Math.round(n).toLocaleString('ar-DZ')}
+
+var SERVICES = [
+  {n:'تصميم شعار وهوية', d:'شعار + ألوان + خطوط', p:500},
+  {n:'متجر إلكتروني', d:'موقع بيع جاهز للاستخدام', p:10000},
+  {n:'حملة إعلانية', d:'إعداد وإدارة إعلان على السوشيال ميديا', p:2000},
+  {n:'خطة عمل مفصلة', d:'وثيقة PDF احترافية', p:1000}
+];
+var currentService = null;
+
+function nextStep(n){
+  document.querySelectorAll('.step-content').forEach(function(e){e.classList.remove('active')});
+  $('step-'+n).classList.add('active');
+}
+
+function analyzeMarket(){
+  var idea = $('ideaInput').value.trim(), target = $('targetInput').value.trim();
+  if(!idea){alert('اكتب فكرتك أولاً');nextStep(1);return}
+  var score = 35, notes = [];
+  if(idea.length > 12){score += 10}else{notes.push('فكرتك مختصرة جداً، وضّحها أكثر (ماذا تبيع ولمن؟).')}
+  if(target.length > 8){score += 15}else{notes.push('حدّد الجمهور المستهدف بدقة.')}
+  if(/\d/.test(target)){score += 15}else{notes.push('اذكر ميزانيتك بالأرقام لتقدير واقعي.')}
+  if(/(متجر|ملابس|عطر|توصيل|تطبيق|خدمة|طعام|حلويات|تجميل)/.test(idea)){score += 10; notes.push('المجال مطلوب لكن المنافسة فيه عالية؛ ابحث عن ميزة تميّزك.')}
+  score = Math.min(score, 90);
+  var level = score >= 70 ? 'واعدة 👍' : score >= 50 ? 'متوسطة، تحتاج تدقيقاً' : 'تحتاج تطويراً';
+  $('projectTitleDisplay').textContent = 'تقييم فكرة: ' + idea;
+  $('scoreBar').style.width = score + '%';
+  $('analysisContent').innerHTML = 'درجة الجاهزية: <b>' + score + '/100</b> — ' + level + '<br>' +
+    (notes.length ? '• ' + notes.map(esc).join('<br>• ') : 'فكرتك مفصّلة بشكل جيد.') +
+    '<br><small>هذا تقييم أولي آلي مبني على وضوح المعطيات، وليس دراسة سوق فعلية.</small>';
+  $('planContent').innerHTML =
+    '1️⃣ <b>الأسبوع 1:</b> دراسة المنافسين (3 إلى 5) وتحديد سعرك.<br>' +
+    '2️⃣ <b>الأسبوع 2:</b> تجهيز المنتج أو العيّنة والهوية البصرية.<br>' +
+    '3️⃣ <b>الأسبوع 3:</b> فتح صفحات البيع وتصوير المنتج.<br>' +
+    '4️⃣ <b>الأسبوع 4:</b> إطلاق تجريبي وإعلان صغير وجمع آراء الزبائن.<br>' +
+    '👤 الجمهور: ' + esc(target || 'غير محدد');
+  $('servicesBody').innerHTML = SERVICES.map(function(s,i){
+    return '<tr><td>'+esc(s.n)+'</td><td>'+esc(s.d)+'</td><td>'+fmt(s.p)+'</td><td><button class="btn" style="padding:4px 12px;font-size:13px" onclick="openOrder('+i+')">اطلب</button></td></tr>';
+  }).join('');
+  $('resultBox').style.display = 'block';
+  $('resultBox').scrollIntoView({behavior:'smooth'});
+}
+
+function resetWizard(){
+  $('ideaInput').value = ''; $('targetInput').value = '';
+  $('resultBox').style.display = 'none';
+  nextStep(1);
+  $('builder').scrollIntoView({behavior:'smooth'});
+}
+
+var COSTS = [[/(ساعة)/,2500],[/(عطر)/,1200],[/(حقيبة|شنطة)/,1800],[/(ملابس|قميص|حذاء|سروال)/,1500]];
+function calc(){
+  var name = $('calcProductName').value.trim();
+  var budget = parseFloat($('calcTotalBudget').value) || 0;
+  var out = $('smartCalcResult');
+  if(!name || budget <= 0){out.textContent = 'أدخل اسم المنتج والميزانية لظهور التفاصيل...';return}
+  var cost = parseFloat($('calcUnitCost').value), guessed = false;
+  if(!(cost > 0)){
+    cost = 1000; guessed = true;
+    for(var i=0;i<COSTS.length;i++){if(COSTS[i][0].test(name)){cost = COSTS[i][1];break}}
+  }
+  var stock = budget * 0.8;
+  var qty = Math.floor(stock / cost);
+  if(qty < 1){out.textContent = 'الميزانية لا تكفي لقطعة واحدة بهذه التكلفة. ارفع الميزانية أو خفّض التكلفة.';return}
+  var price = Math.ceil(cost * 1.6 / 50) * 50; // هامش 60% مقرّب إلى 50 دج
+  var revenue = qty * price, profit = revenue - budget;
+  out.innerHTML =
+    'المنتج: <b>'+esc(name)+'</b><br>' +
+    'تكلفة القطعة: <b>'+fmt(cost)+' دج</b>' + (guessed ? ' (تقدير)' : '') + '<br>' +
+    'الكمية الممكن شراؤها: <b>'+qty+' قطعة</b><br>' +
+    'سعر البيع المقترح: <b>'+fmt(price)+' دج</b><br>' +
+    'الإيراد إذا بِعت كل الكمية: <b>'+fmt(revenue)+' دج</b><br>' +
+    'الربح الصافي التقريبي: <b>'+fmt(profit)+' دج</b>' + (profit < 0 ? ' ⚠️ خسارة' : '');
+}
+
+function openModal(id){$(id).style.display = 'flex'}
+function closeModal(id){$(id).style.display = 'none'}
+document.querySelectorAll('.modal-overlay').forEach(function(m){
+  m.addEventListener('click', function(e){if(e.target === m) m.style.display = 'none'});
+});
+
+function openOrder(i){
+  currentService = SERVICES[i];
+  $('modalServiceDesc').textContent = currentService.n + ' — ' + fmt(currentService.p) + ' دج';
+  togglePaymentInfo();
+  openModal('orderModal');
+}
+function togglePaymentInfo(){
+  var m = $('paymentMethod').value, box = $('paymentInstructions');
+  if(m === 'baridimob') box.innerHTML = '📌 <b>بريدي موب:</b><br>رقم RIP: <code>'+esc(BARIDIMOB_RIP)+'</code><br>المستفيد: منصة فكر وأخدم<br><em>أرسل وصل التحويل عبر الواتساب بعد الطلب.</em>';
+  else if(m === 'ccp') box.innerHTML = '📌 <b>حساب CCP:</b><br>الرقم: <code>'+esc(CCP_NUMBER)+'</code><br><em>أرسل وصل التحويل عبر الواتساب بعد الطلب.</em>';
+  else box.innerHTML = '📌 تدفع عند استلام الخدمة بعد الاتفاق معك عبر الواتساب.';
+}
+function openWA(text){
+  if(WA_NUMBER === '213000000000'){alert('لم يتم ضبط رقم واتساب صاحب المنصة بعد.');return}
+  var url = 'https://wa.me/'+WA_NUMBER+'?text='+encodeURIComponent(text);
+  var b = $('waBanner');
+  if(!b){
+    b = document.createElement('div'); b.id = 'waBanner';
+    b.style.cssText = 'position:fixed;bottom:16px;left:16px;right:16px;z-index:2000;background:#2de2b0;color:#1a1033;border:3px solid #1a1033;border-radius:16px;padding:14px;text-align:center;font-weight:700;box-shadow:4px 4px 0 #1a1033';
+    document.body.appendChild(b);
+  }
+  b.innerHTML = '✅ تم تجهيز طلبك. <a href="'+url+'" target="_blank" rel="noopener" style="color:#1a1033;text-decoration:underline">اضغط هنا لفتح الواتساب وإرسال الرسالة</a>';
+  var a = document.createElement('a'); a.href = url; a.target = '_blank'; a.rel = 'noopener';
+  document.body.appendChild(a); a.click(); a.remove();
+}
+
+var user = null, AUTH_HTML = '';
+function showUser(){
+  $('authBox').innerHTML = '<div class="welcome">👋 مرحباً '+esc(user.name)+' <button class="btn" style="padding:4px 12px;font-size:13px" onclick="logout()">خروج</button></div>';
+}
+function saveUser(u){
+  user = u;
+  try{localStorage.setItem('fw_user', JSON.stringify(u))}catch(e){}
+  showUser();
+}
+function logout(){
+  user = null;
+  try{localStorage.removeItem('fw_user')}catch(e){}
+  $('authBox').innerHTML = AUTH_HTML;
+}
+function submitSignup(e){
+  e.preventDefault();
+  var u = {name:$('suName').value.trim(), email:$('suEmail').value.trim(), via:'email'};
+  saveUser(u);
+  closeModal('signupModal');
+  openWA('تسجيل زبون جديد:\nالاسم: '+u.name+'\nالبريد: '+u.email);
+}
+function googleSignup(){
+  if(!GOOGLE_CLIENT_ID){alert('التسجيل بجوجل غير مفعّل بعد. ضع GOOGLE_CLIENT_ID في الكود.');return}
+  function init(){
+    google.accounts.id.initialize({client_id:GOOGLE_CLIENT_ID, callback:onGoogle});
+    google.accounts.id.prompt();
+  }
+  if(window.google && google.accounts){init();return}
+  var s = document.createElement('script');
+  s.src = 'https://accounts.google.com/gsi/client'; s.onload = init;
+  document.head.appendChild(s);
+}
+function onGoogle(r){
+  try{
+    var p = JSON.parse(decodeURIComponent(escape(atob(r.credential.split('.')[1].replace(/-/g,'+').replace(/_/g,'/')))));
+    saveUser({name:p.name || p.email, email:p.email, via:'google'});
+    openWA('تسجيل زبون جديد (Google):\nالاسم: '+(p.name||'')+'\nالبريد: '+p.email);
+  }catch(err){alert('تعذّر التسجيل بجوجل')}
+}
+function submitOrder(e){
+  e.preventDefault();
+  var pm = $('paymentMethod').options[$('paymentMethod').selectedIndex].text;
+  openWA('طلب خدمة: '+currentService.n+' ('+currentService.p+' دج)\nالاسم: '+$('clientName').value+'\nالهاتف: '+$('clientPhone').value+'\nالدفع: '+pm);
+  closeModal('orderModal');
+}
+function submitContact(e){
+  e.preventDefault();
+  openWA('رسالة من '+$('cName').value+':\n'+$('cMsg').value);
+  closeModal('contactModal');
+}
+
+AUTH_HTML = $('authBox').innerHTML;
+try{var su = localStorage.getItem('fw_user'); if(su){user = JSON.parse(su); showUser()}}catch(e){}
+</script>
+</body>
+  </html>
